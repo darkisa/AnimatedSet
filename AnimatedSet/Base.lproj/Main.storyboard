@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AnimatedSet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="riL-Q7-diA" customClass="CardsContainer" customModule="AnimatedSet">
+                                <rect key="frame" x="16" y="107" width="343" height="671"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="1ff-eI-PHw" appends="YES" id="AW1-CQ-R5s"/>
+                                </connections>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="156" translatesAutoresizingMaskIntoConstraints="NO" id="T4x-Xt-JNE">
+                                <rect key="frame" x="16" y="67" width="343" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4g-4U-mu6">
+                                        <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A32-qQ-kOx">
+                                        <rect key="frame" x="249.66666666666671" y="0.0" width="93.333333333333343" height="30"/>
+                                        <color key="backgroundColor" red="0.14042041247639059" green="0.19700795949680827" blue="1" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="New Game">
+                                            <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="newGame" destination="BYZ-38-t0r" eventType="touchUpInside" id="hiq-TZ-hQc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="riL-Q7-diA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" priority="750" constant="16" id="53Q-pn-zIP"/>
+                            <constraint firstItem="riL-Q7-diA" firstAttribute="top" secondItem="T4x-Xt-JNE" secondAttribute="bottom" constant="10" id="5GS-Ip-7ly"/>
+                            <constraint firstItem="T4x-Xt-JNE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="23" id="Lsc-WM-gJF"/>
+                            <constraint firstItem="riL-Q7-diA" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="h6e-ln-OuT"/>
+                            <constraint firstItem="riL-Q7-diA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="oCF-QB-1tK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T4x-Xt-JNE" secondAttribute="trailing" constant="16" id="ros-0u-WZB"/>
+                            <constraint firstItem="T4x-Xt-JNE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ufs-3w-e4t"/>
+                            <constraint firstAttribute="trailing" secondItem="riL-Q7-diA" secondAttribute="trailing" constant="16" id="wzy-9b-VK0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="cardsContainer" destination="riL-Q7-diA" id="2fa-vy-ZOU"/>
+                        <outlet property="score" destination="P4g-4U-mu6" id="0Kb-kH-vVl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="1ff-eI-PHw">
+                    <connections>
+                        <action selector="dealThreeMoreCards:" destination="BYZ-38-t0r" id="jjI-fj-Og0"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="132" y="133.00492610837438"/>
+        </scene>
+    </scenes>
+</document>
