@@ -19,6 +19,7 @@ class ViewController: UIViewController {
   
   @IBOutlet weak var score: UILabel!
   private var game = Set()
+  @IBOutlet weak var deckOfCards: PlayingCardView!
   
   @IBAction private func newGame() {
     game = Set()
@@ -26,6 +27,12 @@ class ViewController: UIViewController {
     for _ in 0..<12 {
       addCardSubviewToCardContainer()
     }
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    deckOfCards.isFaceUp = false
+    newGame()
   }
   
   private func removeExistingSubviews() {
@@ -68,11 +75,6 @@ class ViewController: UIViewController {
       let subView = cardsContainer.subviews.first(where: { ($0 as? PlayingCardView)?.card == card }) as? PlayingCardView
       subView?.selected = false
     }
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    newGame()
   }
   
   private func addTapGesture(view: PlayingCardView) {

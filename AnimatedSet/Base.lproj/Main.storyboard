@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="riL-Q7-diA" customClass="CardsContainer" customModule="AnimatedSet">
-                                <rect key="frame" x="16" y="107" width="343" height="671"/>
+                                <rect key="frame" x="16" y="107" width="343" height="548"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -47,22 +47,30 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugg-Xp-wGd" customClass="PlayingCardView" customModule="AnimatedSet" customModuleProvider="target">
+                                <rect key="frame" x="16" y="663" width="240" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="riL-Q7-diA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" priority="750" constant="16" id="53Q-pn-zIP"/>
-                            <constraint firstItem="riL-Q7-diA" firstAttribute="top" secondItem="T4x-Xt-JNE" secondAttribute="bottom" constant="10" id="5GS-Ip-7ly"/>
+                            <constraint firstItem="ugg-Xp-wGd" firstAttribute="top" secondItem="riL-Q7-diA" secondAttribute="bottom" constant="8" id="2FS-7F-TwF"/>
+                            <constraint firstItem="riL-Q7-diA" firstAttribute="top" secondItem="T4x-Xt-JNE" secondAttribute="bottom" constant="10" id="4Y2-91-YRo"/>
+                            <constraint firstItem="ugg-Xp-wGd" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="13" id="6uz-oK-Suj"/>
                             <constraint firstItem="T4x-Xt-JNE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="23" id="Lsc-WM-gJF"/>
-                            <constraint firstItem="riL-Q7-diA" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="h6e-ln-OuT"/>
-                            <constraint firstItem="riL-Q7-diA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="oCF-QB-1tK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ugg-Xp-wGd" secondAttribute="trailing" constant="119" id="ZPu-kB-uJw"/>
+                            <constraint firstItem="ugg-Xp-wGd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="619" id="bBs-8c-ReK"/>
+                            <constraint firstItem="riL-Q7-diA" firstAttribute="leading" secondItem="T4x-Xt-JNE" secondAttribute="leading" id="cov-ZX-MJr"/>
+                            <constraint firstItem="riL-Q7-diA" firstAttribute="trailing" secondItem="T4x-Xt-JNE" secondAttribute="trailing" id="obw-0z-xIW"/>
+                            <constraint firstItem="ugg-Xp-wGd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="q7c-ku-cii"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T4x-Xt-JNE" secondAttribute="trailing" constant="16" id="ros-0u-WZB"/>
                             <constraint firstItem="T4x-Xt-JNE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ufs-3w-e4t"/>
-                            <constraint firstAttribute="trailing" secondItem="riL-Q7-diA" secondAttribute="trailing" constant="16" id="wzy-9b-VK0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="cardsContainer" destination="riL-Q7-diA" id="2fa-vy-ZOU"/>
+                        <outlet property="deckOfCards" destination="ugg-Xp-wGd" id="w9V-4S-Pfz"/>
                         <outlet property="score" destination="P4g-4U-mu6" id="0Kb-kH-vVl"/>
                     </connections>
                 </viewController>

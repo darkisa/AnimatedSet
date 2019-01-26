@@ -11,6 +11,7 @@ import UIKit
 class PlayingCardView: UIView {
   
   var card = Card()
+  var isFaceUp = true
   var selected = false { didSet(newValue) { cardSelected() }
   }
   
@@ -19,15 +20,38 @@ class PlayingCardView: UIView {
     roundedRect.addClip()
     UIColor.white.setFill()
     roundedRect.fill()
-    let path = UIBezierPath()
-    drawSymbol(of: card, path: path)
-    setColor(of: card)
-    setFill(of: card, path: path)
-    path.addClip()
-    path.lineWidth = 3.0
-    path.stroke()
+    if isFaceUp {
+      let path = UIBezierPath()
+      drawSymbol(of: card, path: path)
+      setColor(of: card)
+      setFill(of: card, path: path)
+      path.addClip()
+      path.lineWidth = 3.0
+      path.stroke()
+    } else {
+        drawBackOfCard()
+        placeBackOfCardImage()
+    }
     layer.cornerRadius = cornerRadius
   }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+  }
+  
+  private func placeBackOfCardImage() {
+    let subView = subviews[0]
+    subView.frame.size = sizeBackImage()
+    subView.frame.origin = centerView(subView)
+  }
+  
+  private func drawBackOfCard() {
+    let image = UIImage(named: "serbian_crest")
+    let imageView = UIImageView(image: image)
+    addSubview(imageView)
+  }
+  
+  
   
   private func cardSelected() {
     if selected {
@@ -121,5 +145,20 @@ extension PlayingCardView {
                 endAngle: 2*CGFloat.pi,
                 clockwise: true)
     }
+  }
+}
+
+extension PlayingCardView {
+  private struct Constants {
+    static let imageWidthRatio: CGFloat = 0.60
+    static let imageHeightRatio: CGFloat = 0.60
+  }
+  
+  private func centerView(_ view: UIView) -> CGPoint {
+    return CGPoint(x: bounds.midX - view.bounds.midX, y: bounds.midY - view.bounds.midX)
+  }
+  
+  private func sizeBackImage() -> CGSize {
+    return CGSize(width: bounds.width * Constants.imageWidthRatio, height: bounds.width * Constants.imageHeightRatio)
   }
 }
