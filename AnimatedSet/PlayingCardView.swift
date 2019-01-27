@@ -51,6 +51,7 @@ class PlayingCardView: UIView {
   private func drawBackOfCard() {
     let image = UIImage(named: "serbian_crest")
     let imageView = UIImageView(image: image)
+    imageView.transform = CGAffineTransform.identity.rotated(by: -CGFloat.pi / 2)
     addSubview(imageView)
   }
   

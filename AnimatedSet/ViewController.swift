@@ -11,12 +11,19 @@ import UIKit
 class ViewController: UIViewController {
   
   @IBOutlet weak var cardsContainer: CardsContainer!
-  @IBAction func dealThreeMoreCards(_ sender: UISwipeGestureRecognizer) {
+  @IBAction func dealThreeMoreCards(_ sender: UITapGestureRecognizer) {
     for _ in 0..<3 {
       addCardSubviewToCardContainer()
     }
   }
-
+  
+  lazy var animator = UIDynamicAnimator(referenceView: cardsContainer)
+  lazy var pushBehavior: UIPushBehavior = {
+    let behavior = UIPushBehavior()
+    animator.addBehavior(behavior)
+    return behavior
+  }()
+  
   @IBOutlet weak var score: UILabel!
   private var game = Set()
   @IBOutlet weak var deckOfCards: PlayingCardView!
@@ -35,6 +42,10 @@ class ViewController: UIViewController {
     deckOfCards.isFaceUp = false
     matchedCards.isFaceUp = false
     newGame()
+    cardsContainer.updateSubviews()
+//    for subView in cardsContainer.subviews {
+//      collisionBehavior.addItem(subView)
+//    }
   }
   
   private func removeExistingSubviews() {
