@@ -37,6 +37,9 @@ class PlayingCardView: UIView {
   
   override func layoutSubviews() {
     super.layoutSubviews()
+    if !subviews.isEmpty {
+      placeBackOfCardImage()
+    }
   }
   
   private func placeBackOfCardImage() {

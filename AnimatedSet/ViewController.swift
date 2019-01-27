@@ -16,10 +16,11 @@ class ViewController: UIViewController {
       addCardSubviewToCardContainer()
     }
   }
-  
+
   @IBOutlet weak var score: UILabel!
   private var game = Set()
   @IBOutlet weak var deckOfCards: PlayingCardView!
+  @IBOutlet weak var matchedCards: PlayingCardView!
   
   @IBAction private func newGame() {
     game = Set()
@@ -32,6 +33,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     deckOfCards.isFaceUp = false
+    matchedCards.isFaceUp = false
     newGame()
   }
   
