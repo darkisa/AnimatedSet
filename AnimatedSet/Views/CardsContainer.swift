@@ -18,20 +18,20 @@ class CardsContainer: UIView {
   }
   
   func updateSubviews() {
-    getGridDimensions(numberOfSubviews: subviews.count)
-    for (i, subView) in subviews.enumerated() {
-      UIViewPropertyAnimator.runningPropertyAnimator(
-        withDuration: 0.6,
-        delay: 0.2,
-        options: [],
-        animations: {
-          subView.frame = self.grid[i]!.insetBy(dx: Constants.dxInset, dy: Constants.dyInset)
-          subView.backgroundColor = UIColor.clear
-      })
-    }
+//    getGridDimensions(numberOfSubviews: subviews.count)
+//    for (i, subView) in subviews.enumerated() {
+////      UIViewPropertyAnimator.runningPropertyAnimator(
+////        withDuration: 0.6,
+////        delay: 0.2,
+////        options: [],
+////        animations: {
+//          subView.frame = self.grid[i]!.insetBy(dx: Constants.dxInset, dy: Constants.dyInset)
+//          subView.backgroundColor = UIColor.clear
+////      })
+//    }
   }
   
-  private func getGridDimensions(numberOfSubviews: Int) {
+  func getGridDimensions(numberOfSubviews: Int) {
     grid.cellCount = numberOfSubviews
     grid.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
   }

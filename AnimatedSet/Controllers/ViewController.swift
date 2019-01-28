@@ -15,14 +15,22 @@ class ViewController: UIViewController {
     for _ in 0..<3 {
       addCardSubviewToCardContainer()
     }
+    let endIndex = cardsContainer.subviews.endIndex - 1
+    let thirdFromEnd = endIndex - 2
+    var i = thirdFromEnd
+    for subView in cardsContainer.subviews[thirdFromEnd...endIndex] {
+      var grid = Grid(layout: Grid.Layout.aspectRatio(2/3))
+      grid.cellCount = cardsContainer.subviews.count
+      grid.frame = CGRect(x: 0, y: 0, width: cardsContainer.bounds.width, height: cardsContainer.bounds.height)
+      subView.frame = CGRect(x: 0, y: 300, width: 50, height: 50)
+      subView.backgroundColor = UIColor.clear
+      i += 1
+      cardBehavior.addItem(subView)
+    }
   }
   
-  lazy var animator = UIDynamicAnimator(referenceView: cardsContainer)
-  lazy var pushBehavior: UIPushBehavior = {
-    let behavior = UIPushBehavior()
-    animator.addBehavior(behavior)
-    return behavior
-  }()
+  lazy var animator = UIDynamicAnimator(referenceView: view)
+  lazy var cardBehavior = CardBehavior(in: animator)
   
   @IBOutlet weak var score: UILabel!
   private var game = Set()
@@ -43,9 +51,6 @@ class ViewController: UIViewController {
     matchedCards.isFaceUp = false
     newGame()
     cardsContainer.updateSubviews()
-//    for subView in cardsContainer.subviews {
-//      collisionBehavior.addItem(subView)
-//    }
   }
   
   private func removeExistingSubviews() {
