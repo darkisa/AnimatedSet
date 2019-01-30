@@ -15,20 +15,21 @@ class CardsContainer: UIView {
   override func layoutSubviews() {
     super.layoutSubviews()
     updateSubviews()
+    print("in here")
   }
   
   func updateSubviews() {
-//    getGridDimensions(numberOfSubviews: subviews.count)
-//    for (i, subView) in subviews.enumerated() {
-////      UIViewPropertyAnimator.runningPropertyAnimator(
-////        withDuration: 0.6,
-////        delay: 0.2,
-////        options: [],
-////        animations: {
-//          subView.frame = self.grid[i]!.insetBy(dx: Constants.dxInset, dy: Constants.dyInset)
-//          subView.backgroundColor = UIColor.clear
-////      })
-//    }
+    getGridDimensions(numberOfSubviews: subviews.count)
+    for (i, subView) in subviews.enumerated() {
+      UIViewPropertyAnimator.runningPropertyAnimator(
+        withDuration: 0.6,
+        delay: 0.2,
+        options: [],
+        animations: {
+          subView.frame = self.grid[i]!.insetBy(dx: Constants.dxInset, dy: Constants.dyInset)
+          subView.backgroundColor = UIColor.clear
+     })
+    }
   }
   
   func getGridDimensions(numberOfSubviews: Int) {

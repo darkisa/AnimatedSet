@@ -20,7 +20,7 @@ class CardBehavior: UIDynamicBehavior {
   
   private func push(_ item: UIDynamicItem) {
     let push = UIPushBehavior(items: [item], mode: .instantaneous)
-    push.angle = (-2*CGFloat.pi / 3)
+    push.angle = CGFloat(arc4random_uniform(UInt32(CGFloat.pi)))
     push.magnitude = 1
     push.action = { [unowned push, weak self] in
       self?.removeChildBehavior(push)

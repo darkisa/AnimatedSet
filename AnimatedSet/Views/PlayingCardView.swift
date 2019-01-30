@@ -55,7 +55,14 @@ class PlayingCardView: UIView {
     addSubview(imageView)
   }
   
-  
+  func addRotationAnimation() {
+    let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+    rotateAnimation.fromValue = 0.0
+    rotateAnimation.toValue = CGFloat(.pi * 2.0)
+    rotateAnimation.duration = 2.0
+    rotateAnimation.repeatCount = 2;
+    self.layer.add(rotateAnimation, forKey: nil)
+  }
   
   private func cardSelected() {
     if selected {

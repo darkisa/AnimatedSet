@@ -17,14 +17,11 @@ class ViewController: UIViewController {
     }
     let endIndex = cardsContainer.subviews.endIndex - 1
     let thirdFromEnd = endIndex - 2
-    var i = thirdFromEnd
     for subView in cardsContainer.subviews[thirdFromEnd...endIndex] {
-      var grid = Grid(layout: Grid.Layout.aspectRatio(2/3))
-      grid.cellCount = cardsContainer.subviews.count
-      grid.frame = CGRect(x: 0, y: 0, width: cardsContainer.bounds.width, height: cardsContainer.bounds.height)
-      subView.frame = CGRect(x: 0, y: 300, width: 50, height: 50)
-      subView.backgroundColor = UIColor.clear
-      i += 1
+      subView.frame = CGRect(x: 0, y: 500, width: 50, height: 50)
+      if let cardSubView = subView as? PlayingCardView {
+        cardSubView.addRotationAnimation()
+      }
       cardBehavior.addItem(subView)
     }
   }
