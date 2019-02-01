@@ -29,6 +29,8 @@ struct Set {
 
   var cards = [Card?]()
   private(set) var score = 0
+  let initialNumberOfCardsDealt = 12
+  var numberOfCardsDealt = 12
   lazy var gameSummary = (action: SelectedCardsActions.noaction, selectedCards: [Card]())
   private(set) var selectedCards = [Card]() {
     didSet {

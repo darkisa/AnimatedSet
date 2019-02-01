@@ -10,16 +10,15 @@ import UIKit
 
 class CardsContainer: UIView {
   
-  private var grid = Grid(layout: Grid.Layout.aspectRatio(2/3))
+  private(set) var grid = Grid(layout: Grid.Layout.aspectRatio(2/3))
   
   override func layoutSubviews() {
     super.layoutSubviews()
     updateSubviews()
-    print("in here")
   }
   
   func updateSubviews() {
-    getGridDimensions(numberOfSubviews: subviews.count)
+    updateGrid()
     for (i, subView) in subviews.enumerated() {
       UIViewPropertyAnimator.runningPropertyAnimator(
         withDuration: 0.6,
@@ -32,9 +31,13 @@ class CardsContainer: UIView {
     }
   }
   
-  func getGridDimensions(numberOfSubviews: Int) {
-    grid.cellCount = numberOfSubviews
-    grid.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+  func updateGrid() {
+    if grid.cellCount == subviews.count {
+      return
+    } else {
+      grid.cellCount = subviews.count
+      grid.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+    }
   }
 }
 

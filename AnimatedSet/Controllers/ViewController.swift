@@ -12,16 +12,16 @@ class ViewController: UIViewController {
   
   @IBOutlet weak var cardsContainer: CardsContainer!
   @IBAction func dealThreeMoreCards(_ sender: UITapGestureRecognizer) {
+    game.numberOfCardsDealt += 3
+    var startIndex = cardsContainer.subviews.endIndex
     for _ in 0..<3 {
       addCardSubviewToCardContainer()
     }
-    let endIndex = cardsContainer.subviews.endIndex - 1
-    let thirdFromEnd = endIndex - 2
-    for subView in cardsContainer.subviews[thirdFromEnd...endIndex] {
-      subView.frame = CGRect(x: 0, y: 500, width: 50, height: 50)
-      if let cardSubView = subView as? PlayingCardView {
-        cardSubView.addRotationAnimation()
-      }
+    cardsContainer.updateGrid()
+    for subView in cardsContainer.subviews[startIndex..<cardsContainer.subviews.endIndex] {
+      subView.frame = cardsContainer.grid[startIndex]!
+      startIndex += 1
+      if let cardView = subView as? PlayingCardView { cardView.addRotationAnimation() }
       cardBehavior.addItem(subView)
     }
   }
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
   @IBAction private func newGame() {
     game = Set()
     removeExistingSubviews()
-    for _ in 0..<12 {
+    for _ in 0..<game.initialNumberOfCardsDealt {
       addCardSubviewToCardContainer()
     }
   }
@@ -47,8 +47,11 @@ class ViewController: UIViewController {
     deckOfCards.isFaceUp = false
     matchedCards.isFaceUp = false
     newGame()
-    cardsContainer.updateSubviews()
   }
+  
+//  override func viewDidAppear(_ animated: Bool) {
+//    super.viewDidAppear(false)
+//  }
   
   private func removeExistingSubviews() {
     for view in cardsContainer.subviews {
