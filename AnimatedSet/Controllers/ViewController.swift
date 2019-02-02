@@ -12,32 +12,34 @@ class ViewController: UIViewController {
   
   @IBOutlet weak var cardsContainer: CardsContainer!
   @IBAction func dealThreeMoreCards(_ sender: UITapGestureRecognizer) {
-    game.numberOfCardsDealt += 3
-    var startIndex = cardsContainer.subviews.endIndex
+//    animator.removeAllBehaviors()
+    numberOfCardsInPlay += 3
     for _ in 0..<3 {
       addCardSubviewToCardContainer()
     }
-    cardsContainer.updateGrid()
-    for subView in cardsContainer.subviews[startIndex..<cardsContainer.subviews.endIndex] {
-      subView.frame = cardsContainer.grid[startIndex]!
-      startIndex += 1
-      if let cardView = subView as? PlayingCardView { cardView.addRotationAnimation() }
-      cardBehavior.addItem(subView)
-    }
+//      if let cardView = subView as? PlayingCardView { cardView.addRotationAnimation() }
   }
   
+  // Animation
   lazy var animator = UIDynamicAnimator(referenceView: view)
   lazy var cardBehavior = CardBehavior(in: animator)
   
+  // Set game
   @IBOutlet weak var score: UILabel!
   private var game = Set()
   @IBOutlet weak var deckOfCards: PlayingCardView!
   @IBOutlet weak var matchedCards: PlayingCardView!
+  private var numberOfCardsInPlay = 12 {
+    didSet {
+      cardsContainer.grid.updateGrid(newCellCount: numberOfCardsInPlay)
+    }
+  }
   
   @IBAction private func newGame() {
     game = Set()
     removeExistingSubviews()
-    for _ in 0..<game.initialNumberOfCardsDealt {
+    numberOfCardsInPlay = 12
+    for _ in 0..<numberOfCardsInPlay {
       addCardSubviewToCardContainer()
     }
   }
@@ -49,10 +51,6 @@ class ViewController: UIViewController {
     newGame()
   }
   
-//  override func viewDidAppear(_ animated: Bool) {
-//    super.viewDidAppear(false)
-//  }
-  
   private func removeExistingSubviews() {
     for view in cardsContainer.subviews {
       view.removeFromSuperview()
@@ -61,11 +59,15 @@ class ViewController: UIViewController {
   
   private func addCardSubviewToCardContainer() {
     if game.cards.isEmpty { return }
-    let card = game.cards.popLast()
+    let indexOfLastSubview = cardsContainer.subviews.endIndex
+    let card = game.cards.popLast()!
     let cardView = PlayingCardView()
     addTapGesture(view: cardView)
-    cardView.card = card!!
+    cardView.card = card!
+    cardView.frame = cardsContainer.grid[indexOfLastSubview]!.insetBy(dx: 5, dy: 5)
+    cardView.backgroundColor = UIColor.clear
     cardsContainer.addSubview(cardView)
+    cardBehavior.addItem(cardView)
   }
   
   private func updateView() {
@@ -109,3 +111,9 @@ class ViewController: UIViewController {
   }
 
 }
+
+extension ViewController {
+  
+}
+
+

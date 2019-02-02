@@ -10,7 +10,7 @@ import UIKit
 
 class CardsContainer: UIView {
   
-  private(set) var grid = Grid(layout: Grid.Layout.aspectRatio(2/3))
+  lazy var grid = Grid(layout: Grid.Layout.aspectRatio(2/3), frame: cardsContainerRect())
   
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -18,26 +18,22 @@ class CardsContainer: UIView {
   }
   
   func updateSubviews() {
-    updateGrid()
-    for (i, subView) in subviews.enumerated() {
-      UIViewPropertyAnimator.runningPropertyAnimator(
-        withDuration: 0.6,
-        delay: 0.2,
-        options: [],
-        animations: {
-          subView.frame = self.grid[i]!.insetBy(dx: Constants.dxInset, dy: Constants.dyInset)
-          subView.backgroundColor = UIColor.clear
-     })
-    }
+    print("in here")
+//    updateGrid()
+//    for (i, subView) in subviews.enumerated() {
+////      UIViewPropertyAnimator.runningPropertyAnimator(
+////        withDuration: 0.1,
+////        delay: 0,
+////        options: [],
+////        animations: {
+//          subView.frame = self.grid[i]!.insetBy(dx: Constants.dxInset, dy: Constants.dyInset)
+////          subView.backgroundColor = UIColor.clear
+//     }
+//    }
   }
   
-  func updateGrid() {
-    if grid.cellCount == subviews.count {
-      return
-    } else {
-      grid.cellCount = subviews.count
-      grid.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-    }
+  func cardsContainerRect() -> CGRect {
+    return CGRect(x: Constants.startingX, y: Constants.startingY, width: bounds.width, height: bounds.height)
   }
 }
 

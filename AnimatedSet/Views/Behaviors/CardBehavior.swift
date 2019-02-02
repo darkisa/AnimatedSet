@@ -18,28 +18,39 @@ class CardBehavior: UIDynamicBehavior {
     return behavior
   }()
   
-  private func push(_ item: UIDynamicItem) {
-    let push = UIPushBehavior(items: [item], mode: .instantaneous)
-    push.angle = CGFloat(arc4random_uniform(UInt32(CGFloat.pi)))
-    push.magnitude = 1
-    push.action = { [unowned push, weak self] in
-      self?.removeChildBehavior(push)
-    }
-    addChildBehavior(push)
+  func snap(_ item: UIDynamicItem) {
+    let snap = UISnapBehavior(item: item, snapTo: CGPoint(x: CGFloat.random(in: 0...300), y: CGFloat.random(in: 0...300)))
+    snap.damping = 0.2
+//    snap.action = { [unowned snap, weak self] in
+//      self?.removeChildBehavior(snap)
+//    }
+    addChildBehavior(snap)
   }
   
   func addItem(_ item: UIDynamicItem) {
     itemBehavior.addItem(item)
-    push(item)
+    snap(item)
+//    push(item)
   }
   
   override init() {
     super.init()
     addChildBehavior(itemBehavior)
   }
-  
+
   convenience init(in animator: UIDynamicAnimator) {
     self.init()
     animator.addBehavior(self)
   }
 }
+
+
+//private func push(_ item: UIDynamicItem) {
+//  let push = UIPushBehavior(items: [item], mode: .instantaneous)
+//  push.angle = CGFloat(arc4random_uniform(UInt32(CGFloat.pi)))
+//  push.magnitude = 1
+//  push.action = { [unowned push, weak self] in
+//    self?.removeChildBehavior(push)
+//  }
+//  //    addChildBehavior(push)
+//}
