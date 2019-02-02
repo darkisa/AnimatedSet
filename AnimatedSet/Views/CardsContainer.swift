@@ -18,7 +18,6 @@ class CardsContainer: UIView {
   }
   
   func updateSubviews() {
-    print("in here")
 //    updateGrid()
 //    for (i, subView) in subviews.enumerated() {
 ////      UIViewPropertyAnimator.runningPropertyAnimator(

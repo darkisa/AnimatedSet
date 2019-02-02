@@ -12,7 +12,6 @@ class ViewController: UIViewController {
   
   @IBOutlet weak var cardsContainer: CardsContainer!
   @IBAction func dealThreeMoreCards(_ sender: UITapGestureRecognizer) {
-//    animator.removeAllBehaviors()
     numberOfCardsInPlay += 3
     for _ in 0..<3 {
       addCardSubviewToCardContainer()
@@ -62,12 +61,14 @@ class ViewController: UIViewController {
     let indexOfLastSubview = cardsContainer.subviews.endIndex
     let card = game.cards.popLast()!
     let cardView = PlayingCardView()
+    let gridFrame = cardsContainer.grid[indexOfLastSubview]!
+    let deckOfCardsPoint = deckOfCards.convert(deckOfCards.frame, to: view).origin
     addTapGesture(view: cardView)
     cardView.card = card!
-    cardView.frame = cardsContainer.grid[indexOfLastSubview]!.insetBy(dx: 5, dy: 5)
+    cardView.frame = CGRect(origin: deckOfCardsPoint, size: gridFrame.size)
     cardView.backgroundColor = UIColor.clear
     cardsContainer.addSubview(cardView)
-    cardBehavior.addItem(cardView)
+    cardBehavior.addItem(cardView, gridFrame.origin)
   }
   
   private func updateView() {

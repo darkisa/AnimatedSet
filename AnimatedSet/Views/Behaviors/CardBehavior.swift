@@ -18,18 +18,15 @@ class CardBehavior: UIDynamicBehavior {
     return behavior
   }()
   
-  func snap(_ item: UIDynamicItem) {
-    let snap = UISnapBehavior(item: item, snapTo: CGPoint(x: CGFloat.random(in: 0...300), y: CGFloat.random(in: 0...300)))
+  func snap(_ item: UIDynamicItem, _ point: CGPoint) {
+    let snap = UISnapBehavior(item: item, snapTo: point)
     snap.damping = 0.2
-//    snap.action = { [unowned snap, weak self] in
-//      self?.removeChildBehavior(snap)
-//    }
     addChildBehavior(snap)
   }
   
-  func addItem(_ item: UIDynamicItem) {
+  func addItem(_ item: UIDynamicItem, _ point: CGPoint = CGPoint.zero) {
     itemBehavior.addItem(item)
-    snap(item)
+    snap(item, point)
 //    push(item)
   }
   
