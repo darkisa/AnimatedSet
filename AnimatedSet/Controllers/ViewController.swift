@@ -20,7 +20,7 @@ class ViewController: UIViewController {
   }
   
   // Animation
-  lazy var animator = UIDynamicAnimator(referenceView: view)
+  lazy var animator = UIDynamicAnimator(referenceView: cardsContainer)
   lazy var cardBehavior = CardBehavior(in: animator)
   
   // Set game
@@ -62,13 +62,17 @@ class ViewController: UIViewController {
     let card = game.cards.popLast()!
     let cardView = PlayingCardView()
     let gridFrame = cardsContainer.grid[indexOfLastSubview]!
-    let deckOfCardsPoint = deckOfCards.convert(deckOfCards.frame, to: view).origin
+    let deckOfCardsPoint = deckOfCards.convert(deckOfCards.frame, to: cardsContainer).origin
     addTapGesture(view: cardView)
     cardView.card = card!
     cardView.frame = CGRect(origin: deckOfCardsPoint, size: gridFrame.size)
+    cardView.transform = CGAffineTransform(rotationAngle: .pi / 2)
     cardView.backgroundColor = UIColor.clear
+    if numberOfCardsInPlay > 12 {
+      cardView.addRotationAnimation()
+    }
     cardsContainer.addSubview(cardView)
-    cardBehavior.addItem(cardView, gridFrame.origin)
+    cardsContainer.updateSubviews()
   }
   
   private func updateView() {
@@ -111,10 +115,6 @@ class ViewController: UIViewController {
     updateView()
   }
 
-}
-
-extension ViewController {
-  
 }
 
 

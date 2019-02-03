@@ -14,21 +14,21 @@ class CardsContainer: UIView {
   
   override func layoutSubviews() {
     super.layoutSubviews()
+    grid.frame = cardsContainerRect()
     updateSubviews()
   }
   
   func updateSubviews() {
-//    updateGrid()
-//    for (i, subView) in subviews.enumerated() {
-////      UIViewPropertyAnimator.runningPropertyAnimator(
-////        withDuration: 0.1,
-////        delay: 0,
-////        options: [],
-////        animations: {
-//          subView.frame = self.grid[i]!.insetBy(dx: Constants.dxInset, dy: Constants.dyInset)
-////          subView.backgroundColor = UIColor.clear
-//     }
-//    }
+    for (i, subView) in subviews.enumerated() {
+      UIViewPropertyAnimator.runningPropertyAnimator(
+        withDuration: 0.6,
+        delay: 0.2,
+        options: [],
+        animations: {
+          subView.frame = self.grid[i]!.insetBy(dx: Constants.dxInset, dy: Constants.dyInset)
+          subView.transform = CGAffineTransform.identity
+     })
+    }
   }
   
   func cardsContainerRect() -> CGRect {

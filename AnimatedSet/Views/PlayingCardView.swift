@@ -51,7 +51,7 @@ class PlayingCardView: UIView {
     let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
     rotateAnimation.fromValue = 0.0
     rotateAnimation.toValue = CGFloat(.pi * 2.0)
-    rotateAnimation.duration = 2.0
+    rotateAnimation.duration = 0.6
     rotateAnimation.repeatCount = 2;
     self.layer.add(rotateAnimation, forKey: nil)
   }

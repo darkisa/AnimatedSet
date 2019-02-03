@@ -10,13 +10,13 @@ import UIKit
 
 class CardBehavior: UIDynamicBehavior {
   
-  lazy var itemBehavior: UIDynamicItemBehavior = {
-    let behavior = UIDynamicItemBehavior()
-    behavior.allowsRotation = true
-    behavior.elasticity = 1.0
-    behavior.resistance = 0
-    return behavior
-  }()
+//  lazy var itemBehavior: UIDynamicItemBehavior = {
+//    let behavior = UIDynamicItemBehavior()
+//    behavior.allowsRotation = true
+//    behavior.elasticity = 1.0
+//    behavior.resistance = 0
+//    return behavior
+//  }()
   
   func snap(_ item: UIDynamicItem, _ point: CGPoint) {
     let snap = UISnapBehavior(item: item, snapTo: point)
@@ -25,14 +25,14 @@ class CardBehavior: UIDynamicBehavior {
   }
   
   func addItem(_ item: UIDynamicItem, _ point: CGPoint = CGPoint.zero) {
-    itemBehavior.addItem(item)
+//    itemBehavior.addItem(item)
     snap(item, point)
 //    push(item)
   }
   
   override init() {
     super.init()
-    addChildBehavior(itemBehavior)
+//    addChildBehavior(itemBehavior)
   }
 
   convenience init(in animator: UIDynamicAnimator) {
