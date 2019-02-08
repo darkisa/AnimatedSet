@@ -92,8 +92,14 @@ class ViewController: UIViewController {
     let gameSummary = game.gameSummary
     let selectedCards = game.gameSummary.selectedCards
     switch gameSummary.action {
-    case .remove: removeCards(cards: selectedCards)
-    case .deselect: deselectCards(cards: selectedCards)
+    case .remove:
+      for card in selectedCards {
+        removeCard(card: card)
+      }
+    case .deselect:
+      for card in selectedCards {
+        deselectCards(card: card)
+      }
     case .noaction: break
     }
     game.gameSummary.action = .noaction
@@ -101,18 +107,19 @@ class ViewController: UIViewController {
     score.text = "Score: \(game.score)"
   }
   
-  private func removeCards(cards: [Card]) {
-    for card in cards {
-      let subView = cardsContainer.subviews.first(where: { ($0 as? PlayingCardView)?.card == card })
-      subView?.removeFromSuperview()
+  private func removeCard(card: Card) {
+    guard let subView = cardsContainer.subviews.first(where: { ($0 as? PlayingCardView)?.card == card }) else {
+      return
     }
+    cardBehavior.addItem(subView)
+//    subView.removeFromSuperview()
   }
   
-  private func deselectCards(cards: [Card]) {
-    for card in cards {
-      let subView = cardsContainer.subviews.first(where: { ($0 as? PlayingCardView)?.card == card }) as? PlayingCardView
-      subView?.selected = false
+  private func deselectCards(card: Card) {
+    guard let subView = cardsContainer.subviews.first(where: { ($0 as? PlayingCardView)?.card == card }) as? PlayingCardView else {
+      return
     }
+    subView.selected = false
   }
   
   private func addTapGesture(view: PlayingCardView) {

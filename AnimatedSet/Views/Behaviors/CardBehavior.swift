@@ -10,13 +10,26 @@ import UIKit
 
 class CardBehavior: UIDynamicBehavior {
   
-//  lazy var itemBehavior: UIDynamicItemBehavior = {
-//    let behavior = UIDynamicItemBehavior()
-//    behavior.allowsRotation = true
-//    behavior.elasticity = 1.0
-//    behavior.resistance = 0
-//    return behavior
-//  }()
+  lazy var itemBehavior: UIDynamicItemBehavior = {
+    let behavior = UIDynamicItemBehavior()
+    behavior.allowsRotation = true
+    behavior.elasticity = 1.0
+    behavior.resistance = 0
+    return behavior
+  }()
+  
+  private func collision(_ item: UIDynamicItem) {
+    let collision = UICollisionBehavior(items: [item])
+    collision.translatesReferenceBoundsIntoBoundary = true
+    addChildBehavior(collision)
+  }
+  
+  private func push(_ item: UIDynamicItem) {
+    let push = UIPushBehavior(items: [item], mode: .instantaneous)
+    push.angle = CGFloat(arc4random_uniform(UInt32(CGFloat.pi)))
+    push.magnitude = 10
+    addChildBehavior(push)
+  }
   
   func snap(_ item: UIDynamicItem, _ point: CGPoint) {
     let snap = UISnapBehavior(item: item, snapTo: point)
@@ -25,9 +38,10 @@ class CardBehavior: UIDynamicBehavior {
   }
   
   func addItem(_ item: UIDynamicItem, _ point: CGPoint = CGPoint.zero) {
-//    itemBehavior.addItem(item)
-    snap(item, point)
-//    push(item)
+    itemBehavior.addItem(item)
+    collision(item)
+//    snap(item, point)
+    push(item)
   }
   
   override init() {
