@@ -11,7 +11,6 @@ import UIKit
 class CardsContainer: UIView {
   
   lazy var grid = Grid(layout: Grid.Layout.aspectRatio(2/3), frame: cardsContainerRect())
-  var cardDelay = Timer()
   
   override func layoutSubviews() {
     super.layoutSubviews()

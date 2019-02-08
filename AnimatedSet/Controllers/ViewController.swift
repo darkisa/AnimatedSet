@@ -13,17 +13,18 @@ class ViewController: UIViewController {
   @IBOutlet weak var cardsContainer: CardsContainer!
   @IBAction func dealThreeMoreCards(_ sender: UITapGestureRecognizer) {
     numberOfCardsInPlay += 3
+    var delay = 0.0
     for _ in 0..<3 {
-      addCardSubviewToCardContainer()
+      if let cardView = addCardSubviewToCardContainer() {
+        dealCard(card: cardView, delay: delay)
+        delay += 0.08
+      }
     }
   }
   
   // Animation
   lazy var animator = UIDynamicAnimator(referenceView: cardsContainer)
   lazy var cardBehavior = CardBehavior(in: animator)
-  
-  // Delay for card deal
-  var cardDelay = Timer()
   
   // Set game
   @IBOutlet weak var score: UILabel!
@@ -42,7 +43,7 @@ class ViewController: UIViewController {
     removeExistingSubviews()
     numberOfCardsInPlay = 12
     for _ in 0..<numberOfCardsInPlay {
-      addCardSubviewToCardContainer()
+      _ = addCardSubviewToCardContainer()
     }
   }
   
@@ -59,8 +60,8 @@ class ViewController: UIViewController {
     }
   }
   
-  @objc private func addCardSubviewToCardContainer() {
-    if game.cards.isEmpty { return }
+  @objc private func addCardSubviewToCardContainer() -> PlayingCardView? {
+    if game.cards.isEmpty { return nil }
     let card = game.cards.popLast()!
     let cardView = PlayingCardView()
     let deckOfCardsFrame = deckOfCards.convert(deckOfCards.frame, to: cardsContainer)
@@ -72,6 +73,19 @@ class ViewController: UIViewController {
       cardView.addRotationAnimation()
     }
     cardsContainer.addSubview(cardView)
+    return cardView
+  }
+  
+  private func dealCard(card: PlayingCardView, delay: Double) {
+    let gridPosition = cardsContainer.subviews.endIndex - 1
+    UIViewPropertyAnimator.runningPropertyAnimator(
+      withDuration: 0.6,
+      delay: delay,
+      options: [],
+      animations: {
+        card.frame = self.cardsContainer.grid[gridPosition]!.insetBy(dx: 5, dy: 5)
+      }
+    )
   }
   
   private func updateView() {
