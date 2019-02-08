@@ -16,12 +16,14 @@ class ViewController: UIViewController {
     for _ in 0..<3 {
       addCardSubviewToCardContainer()
     }
-//      if let cardView = subView as? PlayingCardView { cardView.addRotationAnimation() }
   }
   
   // Animation
   lazy var animator = UIDynamicAnimator(referenceView: cardsContainer)
   lazy var cardBehavior = CardBehavior(in: animator)
+  
+  // Delay for card deal
+  var cardDelay = Timer()
   
   // Set game
   @IBOutlet weak var score: UILabel!
@@ -33,6 +35,7 @@ class ViewController: UIViewController {
       cardsContainer.grid.updateGrid(newCellCount: numberOfCardsInPlay)
     }
   }
+ 
   
   @IBAction private func newGame() {
     game = Set()
@@ -56,23 +59,19 @@ class ViewController: UIViewController {
     }
   }
   
-  private func addCardSubviewToCardContainer() {
+  @objc private func addCardSubviewToCardContainer() {
     if game.cards.isEmpty { return }
-    let indexOfLastSubview = cardsContainer.subviews.endIndex
     let card = game.cards.popLast()!
     let cardView = PlayingCardView()
-    let gridFrame = cardsContainer.grid[indexOfLastSubview]!
-    let deckOfCardsPoint = deckOfCards.convert(deckOfCards.frame, to: cardsContainer).origin
+    let deckOfCardsFrame = deckOfCards.convert(deckOfCards.frame, to: cardsContainer)
     addTapGesture(view: cardView)
     cardView.card = card!
-    cardView.frame = CGRect(origin: deckOfCardsPoint, size: gridFrame.size)
-    cardView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+    cardView.frame = deckOfCardsFrame
     cardView.backgroundColor = UIColor.clear
     if numberOfCardsInPlay > 12 {
       cardView.addRotationAnimation()
     }
     cardsContainer.addSubview(cardView)
-    cardsContainer.updateSubviews()
   }
   
   private func updateView() {
@@ -116,5 +115,3 @@ class ViewController: UIViewController {
   }
 
 }
-
-
