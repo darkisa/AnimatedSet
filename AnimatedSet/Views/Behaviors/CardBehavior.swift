@@ -28,22 +28,21 @@ class CardBehavior: UIDynamicBehavior {
     let push = UIPushBehavior(items: [item], mode: .instantaneous)
     push.angle = CGFloat(arc4random_uniform(UInt32(CGFloat.pi)))
     push.magnitude = 10
-    push.action = { [weak self] in
+    push.action = { [unowned push, weak self] in
       self?.removeChildBehavior(push)
     }
     addChildBehavior(push)
   }
   
-//  func snap(_ item: UIDynamicItem, _ point: CGPoint) {
-//    let snap = UISnapBehavior(item: item, snapTo: point)
-//    snap.damping = 0.2
-//    addChildBehavior(snap)
-//  }
-  
-  func addItem(_ item: UIDynamicItem, _ point: CGPoint = CGPoint.zero) {
+  func addItem(_ item: UIDynamicItem) {
     itemBehavior.addItem(item)
     collision(item)
     push(item)
+  }
+  
+  func addSnapBehavior(_ item: UIDynamicItem, frame: CGRect) {
+     let snap = UISnapBehavior(item: item, snapTo: frame.origin)
+     addChildBehavior(snap)
   }
   
   override init() {
