@@ -23,7 +23,7 @@ class ViewController: UIViewController {
   }
   
   // Animation
-  lazy var animator = UIDynamicAnimator(referenceView: cardsContainer)
+  lazy var animator = UIDynamicAnimator(referenceView: view)
   lazy var cardBehavior = CardBehavior(in: animator)
   
   // Set game
@@ -111,12 +111,12 @@ class ViewController: UIViewController {
     guard let subView = cardsContainer.subviews.first(where: { ($0 as? PlayingCardView)?.card == card }) else {
       return
     }
-    cardBehavior.addItem(subView)
-    view.addSubview(subView)
+    if let card = subView as? PlayingCardView { card.selected = false }
     let matchedCardsFrame = matchedCards.convert(matchedCards.frame, to: view)
+    view.addSubview(subView)
+    cardBehavior.addItem(subView)
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
       self.cardBehavior.addSnapBehavior(subView, frame: matchedCardsFrame)
-//      subView.frame = matchedCardsFrame!
     }
   }
   

@@ -41,8 +41,8 @@ class CardBehavior: UIDynamicBehavior {
   }
   
   func addSnapBehavior(_ item: UIDynamicItem, frame: CGRect) {
-     let snap = UISnapBehavior(item: item, snapTo: frame.origin)
-     addChildBehavior(snap)
+    let snap = UISnapBehavior(item: item, snapTo: frame.origin)
+    addChildBehavior(snap)
   }
   
   override init() {
