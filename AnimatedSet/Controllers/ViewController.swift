@@ -112,7 +112,14 @@ class ViewController: UIViewController {
       return
     }
     cardBehavior.addItem(subView)
-//    subView.removeFromSuperview()
+    let matchedCardsFrame = matchedCards.convert(matchedCards.frame, to: view)
+    let snap = UISnapBehavior(item: subView, snapTo: CGPoint(x: 50, y: 150))
+    print(animator.behaviors)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+      self.animator.addBehavior(snap)
+//      subView.frame = matchedCardsFrame!
+//      subView.removeFromSuperview()
+    }
   }
   
   private func deselectCards(card: Card) {
