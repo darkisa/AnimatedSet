@@ -18,11 +18,11 @@ class CardBehavior: UIDynamicBehavior {
     return behavior
   }()
   
-  private func collision(_ item: UIDynamicItem) {
-    let collision = UICollisionBehavior(items: [item])
+  lazy var collisionBehavior: UICollisionBehavior = {
+    let collision = UICollisionBehavior()
     collision.translatesReferenceBoundsIntoBoundary = true
-    addChildBehavior(collision)
-  }
+    return collision
+  }()
   
   private func push(_ item: UIDynamicItem) {
     let push = UIPushBehavior(items: [item], mode: .instantaneous)
@@ -36,8 +36,13 @@ class CardBehavior: UIDynamicBehavior {
   
   func addItem(_ item: UIDynamicItem) {
     itemBehavior.addItem(item)
-    collision(item)
+    collisionBehavior.addItem(item)
     push(item)
+  }
+  
+  func removeItem(_ item: UIDynamicItem) {
+    itemBehavior.removeItem(item)
+    collisionBehavior.removeItem(item)
   }
   
   func addSnapBehavior(_ item: UIDynamicItem, frame: CGRect) {
@@ -48,6 +53,7 @@ class CardBehavior: UIDynamicBehavior {
   override init() {
     super.init()
     addChildBehavior(itemBehavior)
+    addChildBehavior(collisionBehavior)
   }
 
   convenience init(in animator: UIDynamicAnimator) {

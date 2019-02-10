@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     for _ in 0..<3 {
       if let cardView = addCardSubviewToCardContainer() {
         dealCard(card: cardView, delay: delay)
-        delay += 0.08
+        delay += 0.3
       }
     }
   }
@@ -42,8 +42,17 @@ class ViewController: UIViewController {
     game = Set()
     removeExistingSubviews()
     numberOfCardsInPlay = 12
-    for _ in 0..<numberOfCardsInPlay {
-      _ = addCardSubviewToCardContainer()
+    var delay = 0.0
+    for i in 0..<numberOfCardsInPlay {
+      let cardView = addCardSubviewToCardContainer()
+      UIViewPropertyAnimator.runningPropertyAnimator(
+        withDuration: 0.6,
+        delay: delay,
+        options: [],
+        animations: {
+          cardView?.frame = self.cardsContainer.grid[i]!.insetBy(dx: 5, dy: 5)
+      })
+      delay += 0.2
     }
   }
   
@@ -116,7 +125,17 @@ class ViewController: UIViewController {
     view.addSubview(subView)
     cardBehavior.addItem(subView)
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-      self.cardBehavior.addSnapBehavior(subView, frame: matchedCardsFrame)
+      self.cardBehavior.removeItem(subView)
+      subView.frame.size = CGSize(width: matchedCardsFrame.height, height: matchedCardsFrame.width)
+      subView.transform = CGAffineTransform.identity.rotated(by: CGFloat.pi / 2)
+      subView.setNeedsDisplay()
+      UIViewPropertyAnimator.runningPropertyAnimator(
+        withDuration: 0.3,
+        delay: 0,
+        options: [],
+        animations: {
+          self.cardBehavior.addSnapBehavior(subView, frame: matchedCardsFrame)
+      })
     }
   }
   
