@@ -14,6 +14,7 @@ class PlayingCardView: UIView {
   var isFaceUp = true
   var selected = false { didSet(newValue) { cardSelected() }
   }
+
   
   override func draw(_ rect: CGRect) {
     let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)

@@ -87,6 +87,7 @@
                     </view>
                     <connections>
                         <outlet property="cardsContainer" destination="riL-Q7-diA" id="2fa-vy-ZOU"/>
+                        <outlet property="deckContainer" destination="I8s-gB-o2T" id="uz8-Fc-vyn"/>
                         <outlet property="deckOfCards" destination="ugg-Xp-wGd" id="w9V-4S-Pfz"/>
                         <outlet property="matchedCards" destination="mBc-WW-yWy" id="hRX-4Z-pyc"/>
                         <outlet property="score" destination="P4g-4U-mu6" id="0Kb-kH-vVl"/>

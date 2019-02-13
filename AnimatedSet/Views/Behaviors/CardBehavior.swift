@@ -10,6 +10,8 @@ import UIKit
 
 class CardBehavior: UIDynamicBehavior {
   
+  static var count = 1
+  
   lazy var itemBehavior: UIDynamicItemBehavior = {
     let behavior = UIDynamicItemBehavior()
     behavior.allowsRotation = true
@@ -45,8 +47,11 @@ class CardBehavior: UIDynamicBehavior {
     collisionBehavior.removeItem(item)
   }
   
-  func addSnapBehavior(_ item: UIDynamicItem, frame: CGRect) {
-    let snap = UISnapBehavior(item: item, snapTo: frame.origin)
+  func addSnapBehavior(_ item: UIDynamicItem, point: CGPoint) {
+    let snap = UISnapBehavior(item: item, snapTo: point)
+    snap.action = {
+      item.transform = CGAffineTransform.identity.rotated(by: CGFloat.pi / 2)
+    }
     addChildBehavior(snap)
   }
   

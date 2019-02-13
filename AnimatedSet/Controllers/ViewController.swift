@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
   
   @IBOutlet weak var cardsContainer: CardsContainer!
+  @IBOutlet weak var deckContainer: UIStackView!
   @IBAction func dealThreeMoreCards(_ sender: UITapGestureRecognizer) {
     numberOfCardsInPlay += 3
     var delay = 0.0
@@ -59,7 +60,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     deckOfCards.isFaceUp = false
-    matchedCards.isFaceUp = false
+    matchedCards.alpha = 0
     newGame()
   }
   
@@ -121,20 +122,20 @@ class ViewController: UIViewController {
       return
     }
     if let card = subView as? PlayingCardView { card.selected = false }
-    let matchedCardsFrame = matchedCards.convert(matchedCards.frame, to: view)
+    let matchedCardsCenter = deckContainer.convert(matchedCards.center, to: view)
     view.addSubview(subView)
     cardBehavior.addItem(subView)
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
       self.cardBehavior.removeItem(subView)
-      subView.frame.size = CGSize(width: matchedCardsFrame.height, height: matchedCardsFrame.width)
-      subView.transform = CGAffineTransform.identity.rotated(by: CGFloat.pi / 2)
-      subView.setNeedsDisplay()
       UIViewPropertyAnimator.runningPropertyAnimator(
-        withDuration: 0.3,
+        withDuration: 0.2,
         delay: 0,
         options: [],
         animations: {
-          self.cardBehavior.addSnapBehavior(subView, frame: matchedCardsFrame)
+          subView.transform = CGAffineTransform.identity.rotated(by: CGFloat.pi / 2)
+          subView.frame.size = CGSize(width: self.matchedCards.bounds.width, height: self.matchedCards.bounds.height)
+      }, completion: { [weak self] finished in
+          self?.cardBehavior.addSnapBehavior(subView, point: matchedCardsCenter)
       })
     }
   }
