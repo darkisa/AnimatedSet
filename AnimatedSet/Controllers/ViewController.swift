@@ -41,6 +41,8 @@ class ViewController: UIViewController {
   
   @IBAction private func newGame() {
     game = Set()
+    deckOfCards.alpha = 1
+    score.text = "Score: \(game.score)"
     removeExistingSubviews()
     numberOfCardsInPlay = 12
     var delay = 0.0
@@ -68,10 +70,19 @@ class ViewController: UIViewController {
     for view in cardsContainer.subviews {
       view.removeFromSuperview()
     }
+    for view in view.subviews {
+      if let playingCard = view as? PlayingCardView {
+        playingCard.removeFromSuperview()
+      }
+    }
   }
   
   @objc private func addCardSubviewToCardContainer() -> PlayingCardView? {
-    if game.cards.isEmpty { return nil }
+    if game.cards.isEmpty {
+      return nil
+    } else if game.cards.count == 1 {
+      deckOfCards.alpha = 0
+    }
     let card = game.cards.popLast()!
     let cardView = PlayingCardView()
     let deckOfCardsFrame = deckOfCards.convert(deckOfCards.frame, to: cardsContainer)
@@ -128,7 +139,7 @@ class ViewController: UIViewController {
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
       self.cardBehavior.removeItem(subView)
       UIViewPropertyAnimator.runningPropertyAnimator(
-        withDuration: 0.2,
+        withDuration: 0.1,
         delay: 0,
         options: [],
         animations: {
