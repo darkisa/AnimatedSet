@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var delay = 0.0
     for _ in 0..<3 {
       if let cardView = addCardSubviewToCardContainer() {
+        cardView.addRotationAnimation()
         dealCard(card: cardView, delay: delay)
         delay += 0.3
       }
@@ -45,10 +46,10 @@ class ViewController: UIViewController {
     score.text = "Score: \(game.score)"
     removeExistingSubviews()
     numberOfCardsInPlay = 12
+    animateInitialCardDeal()
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+  private func animateInitialCardDeal() {
     var delay = 0.0
     for i in 0..<numberOfCardsInPlay {
       let cardView = addCardSubviewToCardContainer()
@@ -63,11 +64,19 @@ class ViewController: UIViewController {
     }
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    animateInitialCardDeal()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     deckOfCards.isFaceUp = false
     matchedCards.alpha = 0
-    newGame()
+    game = Set()
+    deckOfCards.alpha = 1
+    score.text = "Score: \(game.score)"
+    numberOfCardsInPlay = 12
   }
   
   private func removeExistingSubviews() {
@@ -94,9 +103,6 @@ class ViewController: UIViewController {
     cardView.card = card!
     cardView.frame = deckOfCardsFrame
     cardView.backgroundColor = UIColor.clear
-    if numberOfCardsInPlay > 12 {
-      cardView.addRotationAnimation()
-    }
     cardsContainer.addSubview(cardView)
     return cardView
   }
