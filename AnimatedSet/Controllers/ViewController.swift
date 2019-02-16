@@ -45,6 +45,10 @@ class ViewController: UIViewController {
     score.text = "Score: \(game.score)"
     removeExistingSubviews()
     numberOfCardsInPlay = 12
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     var delay = 0.0
     for i in 0..<numberOfCardsInPlay {
       let cardView = addCardSubviewToCardContainer()
@@ -132,8 +136,11 @@ class ViewController: UIViewController {
     guard let subView = cardsContainer.subviews.first(where: { ($0 as? PlayingCardView)?.card == card }) else {
       return
     }
-    if let card = subView as? PlayingCardView { card.selected = false }
+    if let card = subView as? PlayingCardView {
+      card.selected = false
+    }
     let matchedCardsCenter = deckContainer.convert(matchedCards.center, to: view)
+    subView.isUserInteractionEnabled = false
     view.addSubview(subView)
     cardBehavior.addItem(subView)
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -149,6 +156,7 @@ class ViewController: UIViewController {
           self?.cardBehavior.addSnapBehavior(subView, point: matchedCardsCenter)
       })
     }
+    numberOfCardsInPlay -= 1
   }
   
   private func deselectCards(card: Card) {
