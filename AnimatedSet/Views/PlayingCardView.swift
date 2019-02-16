@@ -35,17 +35,14 @@ class PlayingCardView: UIView {
     layer.cornerRadius = cornerRadius
   }
   
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    if !subviews.isEmpty {
-//      drawBackOfCard()
-    }
-  }
-  
   private func drawBackOfCard() {
     let image = UIImage(named: "serbian_crest")
-    image?.draw(in: bounds.scaleBy(by: 0.4))
-//    imageView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi/2)
+    let imageView = UIImageView()
+    imageView.frame = self.frame.scaleBy(by: 0.3)
+    imageView.contentMode = .scaleAspectFill
+    imageView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+    imageView.image = image
+    self.addSubview(imageView)
   }
   
   func addRotationAnimation() {
