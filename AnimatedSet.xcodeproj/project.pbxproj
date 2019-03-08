@@ -32,7 +32,7 @@
 		A2CB96B521E6F9BE00EE601F /* PlayingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardView.swift; sourceTree = "<group>"; };
 		A2CB96B921F02D4500EE601F /* CardsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsContainer.swift; sourceTree = "<group>"; };
 		A2CB96CC21FB975B00EE601F /* AnimatedSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimatedSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2F45C8E21FE77D3008023FF /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grid.swift; path = ../../../../../../../../.Trash/Grid.swift; sourceTree = "<group>"; };
+		A2F45C8E21FE77D3008023FF /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		A2F45C9121FE7A38008023FF /* CardBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBehavior.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
