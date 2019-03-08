@@ -197,3 +197,9 @@ private extension CGSize {
         return width * height
     }
 }
+
+extension Grid {
+  mutating func updateGrid(newCellCount: Int) {
+    cellCount = newCellCount
+  }
+}
