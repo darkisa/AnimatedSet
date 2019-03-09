@@ -28,6 +28,7 @@ struct Set {
   }
 
   var cards = [Card?]()
+  var gameStarted = false
   private(set) var score = 0
   lazy var gameSummary = (action: SelectedCardsActions.noaction, selectedCards: [Card]())
   private(set) var selectedCards = [Card]() {

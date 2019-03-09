@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pMp-MT-sRS">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,28 +11,28 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Set-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AnimatedSet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="AnimatedSetViewController" customModule="AnimatedSet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="IOB-Kc-8rt">
-                                <rect key="frame" x="16" y="44" width="343" height="724"/>
+                                <rect key="frame" x="16" y="44" width="343" height="675"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="156" translatesAutoresizingMaskIntoConstraints="NO" id="T4x-Xt-JNE">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.333333333333332"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4g-4U-mu6">
-                                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A32-qQ-kOx">
-                                                <rect key="frame" x="249.66666666666671" y="0.0" width="93.333333333333343" height="30"/>
+                                                <rect key="frame" x="249.66666666666671" y="0.0" width="93.333333333333343" height="20.333333333333332"/>
                                                 <color key="backgroundColor" red="0.14042041247639059" green="0.19700795949680827" blue="1" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="New Game">
                                                     <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -44,12 +44,12 @@
                                         </subviews>
                                     </stackView>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="riL-Q7-diA" customClass="CardsContainer" customModule="AnimatedSet">
-                                        <rect key="frame" x="0.0" y="50" width="343" height="554"/>
+                                        <rect key="frame" x="0.0" y="40.333333333333314" width="343" height="514.66666666666674"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="I8s-gB-o2T">
-                                        <rect key="frame" x="0.0" y="624" width="343" height="100"/>
+                                        <rect key="frame" x="0.0" y="575" width="343" height="100"/>
                                         <subviews>
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugg-Xp-wGd" customClass="PlayingCardView" customModule="AnimatedSet" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="100"/>
@@ -84,6 +84,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Set" id="BzN-IW-vdE" userLabel="Set"/>
                     <connections>
                         <outlet property="cardsContainer" destination="riL-Q7-diA" id="2fa-vy-ZOU"/>
                         <outlet property="deckContainer" destination="I8s-gB-o2T" id="uz8-Fc-vyn"/>
@@ -99,7 +100,41 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="132" y="133.00492610837438"/>
+            <point key="canvasLocation" x="1678" y="-308"/>
+        </scene>
+        <!--Concentration-->
+        <scene sceneID="f1G-TB-Zc8">
+            <objects>
+                <viewController id="07e-Wd-rnu" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ity-SX-qnf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="7dV-Qx-YA0"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Concentration" id="sYD-ua-81f"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F73-71-Sss" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1679" y="406"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="3wY-II-PaP">
+            <objects>
+                <tabBarController id="pMp-MT-sRS" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Hr-Ql-2tc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="cEB-MR-EjI"/>
+                        <segue destination="07e-Wd-rnu" kind="relationship" relationship="viewControllers" id="YVW-Dd-DTw"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8mZ-Ym-cH2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="728" y="79"/>
         </scene>
     </scenes>
 </document>

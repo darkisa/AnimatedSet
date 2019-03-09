@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class AnimatedSetViewController: UIViewController {
   
   @IBOutlet weak var cardsContainer: CardsContainer!
   @IBOutlet weak var deckContainer: UIStackView!
@@ -47,6 +47,7 @@ class ViewController: UIViewController {
     removeExistingSubviews()
     numberOfCardsInPlay = 12
     animateInitialCardDeal()
+    game.gameStarted = true
   }
   
   private func animateInitialCardDeal() {
@@ -66,7 +67,10 @@ class ViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    animateInitialCardDeal()
+    if game.gameStarted == false {
+      animateInitialCardDeal()
+      game.gameStarted = true
+    }
   }
   
   override func viewDidLoad() {
