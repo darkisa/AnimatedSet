@@ -30,7 +30,7 @@ class AnimatedSetViewController: UIViewController {
   
   // Set game
   @IBOutlet weak var score: UILabel!
-  private var game = Set()
+  private var game = SetGame()
   @IBOutlet weak var deckOfCards: PlayingCardView!
   @IBOutlet weak var matchedCards: PlayingCardView!
   private var numberOfCardsInPlay = 12 {
@@ -41,7 +41,7 @@ class AnimatedSetViewController: UIViewController {
  
   
   @IBAction private func newGame() {
-    game = Set()
+    game = SetGame()
     deckOfCards.alpha = 1
     score.text = "Score: \(game.score)"
     removeExistingSubviews()
@@ -77,7 +77,7 @@ class AnimatedSetViewController: UIViewController {
     super.viewDidLoad()
     deckOfCards.isFaceUp = false
     matchedCards.alpha = 0
-    game = Set()
+    game = SetGame()
     deckOfCards.alpha = 1
     score.text = "Score: \(game.score)"
     numberOfCardsInPlay = 12

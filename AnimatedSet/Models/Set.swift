@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Set {
+struct SetGame {
   
   init(){
     for symbol in Card.Symbol.all {
