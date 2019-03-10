@@ -17,7 +17,19 @@ class ThemeChooserViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let destinationViewController = segue.destination as? ConcentrationViewController {
       destinationViewController.selectedTheme = Int(segue.identifier!) ?? 0
+      previousViewController = destinationViewController
     }
   }
+  
+  override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+    if previousViewController != nil {
+      navigationController?.pushViewController(previousViewController!, animated: true)
+      previousViewController!.selectedTheme = Int(identifier!) ?? 0
+      return false
+    }
+    return true
+  }
+  
+  private var previousViewController: ConcentrationViewController?
   
 }

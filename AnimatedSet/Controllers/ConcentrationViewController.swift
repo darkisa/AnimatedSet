@@ -11,7 +11,7 @@ import UIKit
 class ConcentrationViewController: UIViewController {
   private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
   var numberOfPairsOfCards: Int { return (cardButtons.count + 1 ) / 2 }
-  lazy var selectedTheme = Int.random(in: 0..<(themes.count))
+  var selectedTheme: Int = 0
   
   @IBOutlet private weak var flipCountLabel: UILabel!
   @IBOutlet private var cardButtons: [UIButton]!
@@ -19,7 +19,6 @@ class ConcentrationViewController: UIViewController {
   
   @IBAction func newGame(_ sender: UIButton) {
     game.resetGame()
-    selectedTheme = Int.random(in: 0..<(themes.count))
     emoji.removeAll()
     updateViewFromModel()
   }
@@ -54,8 +53,10 @@ class ConcentrationViewController: UIViewController {
   var emoji = [ConcentrationCard:String]()
   
   func emoji(for card: ConcentrationCard) -> String {
-    if emoji[card] == nil, themes[selectedTheme]!.count > 0 {
-      emoji[card] = themes[selectedTheme]!.remove(at: themes[selectedTheme]!.count.arc4random)
+    if card.identifier < 9 {
+      emoji[card] = themes[selectedTheme]?[card.identifier - 1]
+    } else {
+      emoji[card] = themes[selectedTheme]?[card.identifier - ((themes[0]?.count)!)]
     }
     return emoji[card] ?? "?"
   }

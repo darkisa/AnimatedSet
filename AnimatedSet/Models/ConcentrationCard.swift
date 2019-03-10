@@ -11,7 +11,7 @@ import Foundation
 struct ConcentrationCard: Hashable {
   var isFaceUp = false
   var isMatched = false
-  private var identifier: Int
+  var identifier: Int
   var hashValue: Int { return identifier }
   static func ==(lhs: ConcentrationCard, rhs: ConcentrationCard) -> Bool {
     return lhs.identifier == rhs.identifier
